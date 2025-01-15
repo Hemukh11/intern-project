@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College List and Selection</title>
+    <style>
+
+        * {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#searchBar, #filterCategory {
+    width: 48%;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+#collegeList {
+    list-style: none;
+}
+
+.college-item {
+    background: #f9f9f9;
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.college-item h3 {
+    margin: 0;
+}
+
+.select-btn {
+    padding: 8px 15px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.select-btn:hover {
+    background: #0056b3;
+}
+
+#selectedCollegeContainer {
+    margin-top: 30px;
+    text-align: center;
+    padding: 10px;
+    background: #e7f3ff;
+    border: 1px solid #b3d8ff;
+    border-radius: 5px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Career Guidance: College Selection</h1>
+        
+        <!-- Search and Filter Section -->
+        <div class="controls">
+            <input type="text" id="searchBar" placeholder="Search for a college...">
+            <select id="filterCategory">
+                <option value="all">All Categories</option>
+                <option value="engineering">Engineering</option>
+                <option value="medical">Medical</option>
+                <option value="arts">Arts</option>
+                <option value="business">Business</option>
+            </select>
+        </div>
+
+        <!-- College List Section -->
+        <ul id="collegeList">
+            <li class="college-item" data-category="engineering">
+                <h3>Atria institute of Technology</h3>
+                <button class="select-btn">Select</button>
+            </li>
+            <li class="college-item" data-category="medical">
+                <h3>BMS institute of Technology</h3>
+                <button class="select-btn">Select</button>
+            </li>
+            <li class="college-item" data-category="arts">
+                <h3>PES institute of Technology</h3>
+                <button class="select-btn">Select</button>
+            </li>
+            <li class="college-item" data-category="business">
+                <h3>Jnnce Management college</h3>
+                <button class="select-btn">Select</button>
+            </li>
+            <li class="college-item" data-category="engineering">
+                <h3>PES Engineering college</h3>
+                <button class="select-btn">Select</button>
+            </li>
+        </ul>
+
+        <!-- Selected College Section -->
+        <div id="selectedCollegeContainer">
+            <h2>Your Selected College:</h2>
+            <p id="selectedCollege">None</p>
+        </div>
+    </div>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const searchBar = document.getElementById('searchBar');
+    const filterCategory = document.getElementById('filterCategory');
+    const collegeList = document.getElementById('collegeList');
+    const selectButtons = document.querySelectorAll('.select-btn');
+    const selectedCollegeDisplay = document.getElementById('selectedCollege');
+
+    // Search Functionality
+    searchBar.addEventListener('input', () => {
+        const searchText = searchBar.value.toLowerCase();
+        const collegeItems = document.querySelectorAll('.college-item');
+
+        collegeItems.forEach(item => {
+            const collegeName = item.querySelector('h3').textContent.toLowerCase();
+            if (collegeName.includes(searchText)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    filterCategory.addEventListener('change', () => {
+        const category = filterCategory.value;
+        const collegeItems = document.querySelectorAll('.college-item');
+
+        collegeItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            if (category === 'all' || itemCategory === category) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    selectButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const collegeName = event.target.closest('.college-item').querySelector('h3').textContent;
+            selectedCollegeDisplay.textContent = collegeName;
+        });
+    });
+});
+
+    </script>
+</body>
+</html>
