@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Gym Management System</title>
+    <link rel="stylesheet" href="gym.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <!-- Include Navbar -->
+            <nav id="navbar"></nav>
+        </header>
+        
+        <main>
+            <section id="dashboard">
+                <h2>Dashboard</h2>
+                <div id="analytics"></div>
+            </section>
+
+            <section id="members">
+                <h2>Members</h2>
+                <button onclick="addMemberForm()">Add New Member</button>
+                <div id="member-list"></div>
+            </section>
+
+            <section id="trainers">
+                <h2>Trainers</h2>
+                <div id="trainer-list"></div>
+            </section>
+
+            <section id="schedule">
+                <h2>Class Schedule</h2>
+                <div id="class-schedule"></div>
+            </section>
+        </main>
+
+        <footer>
+            <!-- Include Footer -->
+            <div id="footer"></div>
+        </footer>
+    </div>
+
+    <script src="gymfirebase.js"></script>
+    <script src="gymjs.js"></script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.resume-container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+header h2 {
+  margin: 0;
+  font-weight: normal;
+  color: #777;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+nav .tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+nav .tab-button.active,
+nav .tab-button:hover {
+  background: #0056b3;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.progress-bar {
+  background: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 20px;
+}
+
+.progress {
+  height: 100%;
+  background: #28a745;
+  width: 0;
+  transition: width 1s;
+}
+
+form input,
+form textarea,
+form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+form button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+#form-message {
+  color: green;
+  text-align: center;
+}
+
+  </style>
+  <title>Interactive Resume</title>
+</head>
+<body>
+  <div class="resume-container">
+    <header>
+      <h1>Hemanth S</h1>
+      <h2>Web Developer</h2>
+    </header>
+
+    <nav>
+      <button class="tab-button active" data-tab="about">About Me</button>
+      <button class="tab-button" data-tab="skills">Skills</button>
+      <button class="tab-button" data-tab="experience">Experience</button>
+      <button class="tab-button" data-tab="contact">Contact</button>
+      <button class="tab-button" data-tab="contact">Info</button>
+
+    </nav>
+
+    <main>
+      <section id="about" class="tab-content active">
+        <h3>About Me</h3>
+        <p>Hello! I am a passionate web developer with 5 years of experience in creating dynamic websites and applications.</p>
+      </section>
+
+      <section id="skills" class="tab-content">
+        <h3>Skills</h3>
+        <div class="skill">
+          <span>HTML</span>
+          <div class="progress-bar"><div class="progress" data-percent="90"></div></div>
+        </div>
+        <div class="skill">
+          <span>CSS</span>
+          <div class="progress-bar"><div class="progress" data-percent="85"></div></div>
+        </div>
+        <div class="skill">
+          <span>JavaScript</span>
+          <div class="progress-bar"><div class="progress" data-percent="80"></div></div>
+        </div>
+      </section>
+
+      <section id="experience" class="tab-content">
+        <h3>Experience</h3>
+        <p><strong>Web Developer</strong> at ABC Corp (2018 - Present)</p>
+        <p>Developed and maintained responsive websites and applications, enhancing user experience and functionality.</p>
+      </section>
+
+      <section id="contact" class="tab-content">
+        <h3>Contact</h3>
+        <form id="contact-form">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+        <p id="form-message" class="hidden">Message sent successfully!</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab-button');
+  const contents = document.querySelectorAll('.tab-content');
+  const progressBars = document.querySelectorAll('.progress');
+
+  // Handle tab switching
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(btn => btn.classList.remove('active'));
+      tab.classList.add('active');
+
+      contents.forEach(content => content.classList.remove('active'));
+      document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+    });
+  });
+
+  // Animate progress bars on the skills section
+  const skillsTab = document.querySelector('[data-tab="skills"]');
+  skillsTab.addEventListener('click', () => {
+    progressBars.forEach(bar => {
+      const percentage = bar.getAttribute('data-percent');
+      bar.style.width = `${percentage}%`;
+    });
+  });
+
+  // Handle form submission
+  const form = document.getElementById('contact-form');
+  const message = document.getElementById('form-message');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    message.classList.remove('hidden');
+    form.reset();
+    setTimeout(() => message.classList.add('hidden'), 3000);
+  });
+});
+
+  </script>
+</body>
+</html>
